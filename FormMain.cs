@@ -114,7 +114,7 @@ namespace RegExWordSearch
             Regex? rg;
             try
             {
-                rg = new Regex(text);
+                rg = new Regex(text,RegexOptions.IgnoreCase);
             }
             catch (Exception)
             {
