@@ -326,6 +326,14 @@ namespace Utils
             return result.ToString();
         }
         #endregion
+
+        #region
+        public static bool StartsWithIgnoreCase(string str, char ch)
+        {
+            Regex re = new Regex($"^{ch}", RegexOptions.IgnoreCase);
+            return re.IsMatch(str);
+        }
+        #endregion
     }
 
 }

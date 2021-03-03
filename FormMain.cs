@@ -37,18 +37,22 @@ namespace RegExWordSearch
             }
         }
 
-        //TODO: Lazy模式，只创建一次，若没有其他修改，则不再创建。
-        private static List<string> GetWordListAllFromSelectedDicts(bool Rebuild)
+        private List<string> wordListIndex = new();
+        private List<string> GetWordListAllFromSelectedDicts(bool Rebuild=false)
         {
-            List<string> wordListAll = new();
+            if (!Rebuild && wordListIndex.Count > 0)
+                return wordListIndex;
+            
+            wordListIndex.Clear();
             List<string> dictNames2Search = GetDictsInfo(sqliteInstance).Where(i => i.IsChecked == 1).Select(di => di.DictName).ToList();
             foreach (string dictName in dictNames2Search)
             {
-                string sql = $"SELECT [{WordInfoColumns[0]}] FROM [{dictName}]";
-                wordListAll.AddRange(sqliteInstance.SqlColumn(sql));
+                string sql = $"SELECT [{WordInfoColumns[0]}] FROM [{dictName}]" ; 
+
+                wordListIndex.AddRange(sqliteInstance.SqlColumn(sql));
             }
 
-            return wordListAll;
+            return wordListIndex;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -65,8 +69,8 @@ namespace RegExWordSearch
             }
 
             //若库中有词典文件存在，且在搜索组被勾选，则列出被选中词典的词
-            //TODO: 按需列出，当拉滚动条时，再从数据库获取新的。单词按照搜索组勾选顺序当一个词典全部显示完毕后再显示后面的词典。
-            listBoxWordsIndex.DataSource = GetWordListAllFromSelectedDicts(true);
+            //窗口载入时，只列出字母a开头的单词
+            listBoxWordsIndex.DataSource = GetWordListAllFromSelectedDicts().Where(a => StringHelper.StartsWithIgnoreCase(a, 'A')).ToList() ;
         }
 
         private void BtnImportDict2Db_ClickAsync(object sender, EventArgs e)
@@ -103,11 +107,12 @@ namespace RegExWordSearch
             DialogResult dr = formDm.ShowDialog();
             if (formDm.IsCheckIndiceChanged)
             {
-                listBoxWordsIndex.DataSource = GetWordListAllFromSelectedDicts(true);
+                //发生变动时，只列出字母a开头的单词
+                listBoxWordsIndex.DataSource = GetWordListAllFromSelectedDicts(true).Where(a => StringHelper.StartsWithIgnoreCase(a, 'A')).ToList(); ;
             }
         }
 
-        private void comboBoxRegex_TextChanged(object sender, EventArgs e)
+        private void ComboBoxRegex_TextChanged(object sender, EventArgs e)
         {
             wordListResult = new();
             string text = comboBoxRegex.Text;
@@ -124,9 +129,8 @@ namespace RegExWordSearch
                 statusLabel.Text = $"{text} 不是合法的正则表达式";
                 return;
             }
-            List<string> wordListAll = GetWordListAllFromSelectedDicts(false);
 
-
+            List<string> wordListAll = GetWordListAllFromSelectedDicts();
             foreach (string word in wordListAll)
             {
                 if (rg!.IsMatch(word))
@@ -187,5 +191,48 @@ namespace RegExWordSearch
             statusLabel.Text = $"查询结果已写入文件：{fileFullPath}";
         }
 
+        #region 点击标签上的字母
+        private enum LabelChar
+        {
+            A2I,
+            J2R,
+            S2Z,
+        }
+        private void LabelClick(LabelChar label, MouseEventArgs e)
+        {
+            char ch;
+            int index = e.X < 15 ? 0 : 1 + (e.X - 15) / 18;
+            switch (label)
+            {
+                case LabelChar.A2I:
+                    ch = "ABCDEFGHI"[index];
+                    break;
+                case LabelChar.J2R:
+                    ch = "JKLMNOPQR"[index];
+                    break;
+                default:
+                    ch = "STUVWXYZ"[index];
+                    break;
+
+            }
+
+            listBoxWordsIndex.DataSource= GetWordListAllFromSelectedDicts().Where(a=> StringHelper.StartsWithIgnoreCase(a,ch)).ToList();
+        }
+
+        private void LabelA2I_MouseClick(object sender, MouseEventArgs e)
+        {
+            LabelClick(LabelChar.A2I, e);
+        }
+
+        private void labelJ2R_MouseClick(object sender, MouseEventArgs e)
+        {
+            LabelClick(LabelChar.J2R, e);
+        }
+
+        private void labelS2Z_MouseClick(object sender, MouseEventArgs e)
+        {
+            LabelClick(LabelChar.S2Z, e);
+        }
+        #endregion
     }
 }

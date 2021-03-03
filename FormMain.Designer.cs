@@ -47,9 +47,9 @@ namespace RegExWordSearch
             this.btnRegexHelp = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonExportResult = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelA2I = new System.Windows.Forms.Label();
+            this.labelS2Z = new System.Windows.Forms.Label();
+            this.labelJ2R = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +73,7 @@ namespace RegExWordSearch
             this.comboBoxRegex.Size = new System.Drawing.Size(535, 28);
             this.comboBoxRegex.TabIndex = 1;
             this.comboBoxRegex.Text = "请在此处输入正则表达式";
-            this.comboBoxRegex.TextChanged += new System.EventHandler(this.comboBoxRegex_TextChanged);
+            this.comboBoxRegex.TextChanged += new System.EventHandler(this.ComboBoxRegex_TextChanged);
             this.comboBoxRegex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ComboBox1_KeyPress);
             // 
             // btnShowWordsIndex
@@ -216,38 +216,41 @@ namespace RegExWordSearch
             this.buttonExportResult.UseVisualStyleBackColor = true;
             this.buttonExportResult.Click += new System.EventHandler(this.ButtonExportResult_Click);
             // 
-            // label2
+            // labelA2I
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(48, 360);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "A B C D E F G H I";
+            this.labelA2I.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelA2I.AutoSize = true;
+            this.labelA2I.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelA2I.Location = new System.Drawing.Point(48, 360);
+            this.labelA2I.Name = "labelA2I";
+            this.labelA2I.Size = new System.Drawing.Size(160, 13);
+            this.labelA2I.TabIndex = 15;
+            this.labelA2I.Text = "A B C D E F G H I";
+            this.labelA2I.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelA2I_MouseClick);
             // 
-            // label3
+            // labelS2Z
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(48, 394);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "S T U V W X Y Z";
+            this.labelS2Z.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelS2Z.AutoSize = true;
+            this.labelS2Z.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelS2Z.Location = new System.Drawing.Point(48, 394);
+            this.labelS2Z.Name = "labelS2Z";
+            this.labelS2Z.Size = new System.Drawing.Size(142, 13);
+            this.labelS2Z.TabIndex = 16;
+            this.labelS2Z.Text = "S T U V W X Y Z";
+            this.labelS2Z.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelS2Z_MouseClick);
             // 
-            // label4
+            // labelJ2R
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(48, 377);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(160, 13);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "J K L M N O P Q R";
+            this.labelJ2R.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelJ2R.AutoSize = true;
+            this.labelJ2R.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelJ2R.Location = new System.Drawing.Point(48, 377);
+            this.labelJ2R.Name = "labelJ2R";
+            this.labelJ2R.Size = new System.Drawing.Size(160, 13);
+            this.labelJ2R.TabIndex = 17;
+            this.labelJ2R.Text = "J K L M N O P Q R";
+            this.labelJ2R.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelJ2R_MouseClick);
             // 
             // FormMain
             // 
@@ -255,9 +258,9 @@ namespace RegExWordSearch
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(799, 452);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelJ2R);
+            this.Controls.Add(this.labelS2Z);
+            this.Controls.Add(this.labelA2I);
             this.Controls.Add(this.buttonExportResult);
             this.Controls.Add(this.btnUsageHelp);
             this.Controls.Add(this.btnImportDict2Db);
@@ -302,9 +305,9 @@ namespace RegExWordSearch
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.Button buttonExportResult;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelA2I;
+        private System.Windows.Forms.Label labelS2Z;
+        private System.Windows.Forms.Label labelJ2R;
     }
 }
 
