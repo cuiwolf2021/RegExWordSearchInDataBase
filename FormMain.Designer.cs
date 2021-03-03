@@ -46,6 +46,10 @@ namespace RegExWordSearch
             this.btnUsageHelp = new System.Windows.Forms.Button();
             this.btnRegexHelp = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.buttonExportResult = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,7 +134,7 @@ namespace RegExWordSearch
             this.listBoxWordsIndex.ItemHeight = 20;
             this.listBoxWordsIndex.Location = new System.Drawing.Point(48, 45);
             this.listBoxWordsIndex.Name = "listBoxWordsIndex";
-            this.listBoxWordsIndex.Size = new System.Drawing.Size(176, 364);
+            this.listBoxWordsIndex.Size = new System.Drawing.Size(176, 304);
             this.listBoxWordsIndex.TabIndex = 5;
             this.toolTip1.SetToolTip(this.listBoxWordsIndex, "所有单词的列表");
             this.listBoxWordsIndex.SelectedIndexChanged += new System.EventHandler(this.ListBoxWordsIndex_SelectedIndexChanged);
@@ -155,7 +159,7 @@ namespace RegExWordSearch
             this.listBoxResults.ItemHeight = 20;
             this.listBoxResults.Location = new System.Drawing.Point(234, 45);
             this.listBoxResults.Name = "listBoxResults";
-            this.listBoxResults.Size = new System.Drawing.Size(176, 364);
+            this.listBoxResults.Size = new System.Drawing.Size(176, 324);
             this.listBoxResults.Sorted = true;
             this.listBoxResults.TabIndex = 7;
             this.toolTip1.SetToolTip(this.listBoxResults, "匹配正则表达式的单词列表");
@@ -201,12 +205,60 @@ namespace RegExWordSearch
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // buttonExportResult
+            // 
+            this.buttonExportResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonExportResult.Location = new System.Drawing.Point(234, 376);
+            this.buttonExportResult.Name = "buttonExportResult";
+            this.buttonExportResult.Size = new System.Drawing.Size(176, 33);
+            this.buttonExportResult.TabIndex = 14;
+            this.buttonExportResult.Text = "导出搜索结果";
+            this.buttonExportResult.UseVisualStyleBackColor = true;
+            this.buttonExportResult.Click += new System.EventHandler(this.ButtonExportResult_Click);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(48, 360);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(160, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "A B C D E F G H I";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(48, 394);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "S T U V W X Y Z";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Courier", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(48, 377);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(160, 13);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "J K L M N O P Q R";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(799, 452);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.buttonExportResult);
             this.Controls.Add(this.btnUsageHelp);
             this.Controls.Add(this.btnImportDict2Db);
             this.Controls.Add(this.btnRegexHelp);
@@ -249,6 +301,10 @@ namespace RegExWordSearch
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.Button buttonExportResult;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 

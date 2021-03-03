@@ -15,6 +15,12 @@ namespace RegExWordSearch
         #region 帮助文件
         public const string RegexHelpFile = "正则表达式简介.docx";
         public const string AppHelpFile = "程序使用帮助.docx";
+        //public const string SearchResultFile = "查询结果.txt";
+        public static string GetSearchResultFileName()
+        {
+            DateTime now = DateTime.Now;           
+            return $"查询结果-{now.Year:4}-{now.Month:2}-{now.Day:2}.txt";
+        }
         #endregion
 
         #region 词相关

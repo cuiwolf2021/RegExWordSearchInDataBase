@@ -19,6 +19,8 @@ namespace RegExWordSearch
 {
     public partial class FormMain : Form
     {
+        private List<string> wordListResult;
+
         public static SqliteSingleton sqliteInstance = GetInstance(DictHelper.DbFileFolder, DictHelper.DbFileName);
         public FormMain()
         {
@@ -107,6 +109,7 @@ namespace RegExWordSearch
 
         private void comboBoxRegex_TextChanged(object sender, EventArgs e)
         {
+            wordListResult = new();
             string text = comboBoxRegex.Text;
             if (text.Length < 2)
                 return;
@@ -114,7 +117,7 @@ namespace RegExWordSearch
             Regex? rg;
             try
             {
-                rg = new Regex(text,RegexOptions.IgnoreCase);
+                rg = new Regex(text, RegexOptions.IgnoreCase);
             }
             catch (Exception)
             {
@@ -123,14 +126,14 @@ namespace RegExWordSearch
             }
             List<string> wordListAll = GetWordListAllFromSelectedDicts(false);
 
-            List<string> wordListResult = new();
+
             foreach (string word in wordListAll)
             {
                 if (rg!.IsMatch(word))
                     wordListResult.Add(word);
             }
             listBoxResults.DataSource = wordListResult;
-            
+
             listBoxResults.Refresh();
             statusLabel.Text = "匹配单词数量：" + wordListResult.Count;
         }
@@ -145,7 +148,7 @@ namespace RegExWordSearch
         private void btnUsageHelp_Click(object sender, EventArgs e)
         {
             OpenHelpFile(AppHelpFile);
-        }       
+        }
         private void OpenHelpFile(string fileName)
         {
             try
@@ -165,5 +168,24 @@ namespace RegExWordSearch
             }
         }
         #endregion
+
+        private void ButtonExportResult_Click(object sender, EventArgs e)
+        {
+            string fileName = GetSearchResultFileName();
+            string fileFullPath = $"{Environment.CurrentDirectory}/{ fileName}";
+
+            //打开或创建结果文件（每天创建一个）。
+            using (StreamWriter writer = new(new FileStream(fileFullPath, FileMode.Append, FileAccess.Write)))
+            {
+                DateTime now = DateTime.Now;
+                writer.WriteLine($"查询时间：{now.Year,4}年{now.Month,2}月{now.Day,2}日，{now.Hour,2}时{now.Minute,2}分{now.Second,2}秒");
+                writer.WriteLine($"查询表达式：{comboBoxRegex.Text}");
+                string resultString = wordListResult.Aggregate("", (s1, s2) => s1 + " " + s2).Trim();
+                writer.WriteLine($"查询结果：{resultString}");
+                writer.WriteLine();
+            }
+            statusLabel.Text = $"查询结果已写入文件：{fileFullPath}";
+        }
+
     }
 }
